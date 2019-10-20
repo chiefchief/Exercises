@@ -1,21 +1,75 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native'
+import {dayOfWeek} from 'services/dayOfWeek'
+import {setChosenDay} from 'reducers/chosenDay'
+import {connect} from 'react-redux'
 
-export default function RenderWeek({}) {
-  return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: 'lightgray'}}>
-        <Text style={{fontSize: 18, color: 'black'}}>{'1 Неделя'}</Text>
+const {width} = Dimensions.get('window')
+
+function RenderWeek({navigation, item, dispatch}) {
+  const getTaskCount = array => (array.length ? `${array.length} Упражнений` : 'Отсутствуют')
+
+  const goToDay = id => {
+    dispatch(setChosenDay(id))
+    navigation.navigate('Day')
+  }
+
+  const renderItem = (item, index) => (
+    <TouchableOpacity key={index} style={[styles.button, index > 4 && styles.weekEnd]} onPress={() => goToDay(item.id)}>
+      <Text style={styles.dayOfWeek}>{dayOfWeek(index)}</Text>
+      <View style={styles.tasks}>
+        <Text>{`День ${item.id}`}</Text>
+        <Text>{getTaskCount(item.tasks)}</Text>
       </View>
+      <Text style={styles.text}>{'Просмотр'}</Text>
+    </TouchableOpacity>
+  )
+
+  return (
+    <View style={styles.weekContainer}>
+      <View style={styles.headerView}>
+        <Text style={{fontSize: 18, color: 'black'}}>{`${item.week} Неделя`}</Text>
+      </View>
+      {item.days.map(renderItem)}
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+export default connect()(RenderWeek)
 
-// Высота - ​24​,
-// цвет​- светлосерый, поля гориз - ​12​.
-// Текст в заголовке: ​"X неделя"​, цвет​чёрный,
-// размер шрифта ​18​,
-// вертикально ​по​центру,
-// оступ горизонтальный ​12​.
+const styles = StyleSheet.create({
+  weekContainer: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  headerView: {
+    height: 24,
+    width: width - 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'lightgray',
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  button: {
+    width: width - 32,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderTopWidth: 0,
+    paddingVertical: 4,
+    backgroundColor: 'blue',
+  },
+  weekEnd: {
+    backgroundColor: 'red',
+  },
+  dayOfWeek: {
+    width: (width - 32) / 6,
+    textAlign: 'center',
+  },
+  tasks: {
+    width: (width - 32) / 2,
+  },
+  text: {
+    width: (width - 32) / 3,
+    textAlign: 'center',
+  },
+})

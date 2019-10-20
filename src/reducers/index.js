@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 
 export default combineReducers({
-  weeks: require('./weeks').default,
+  chosenDay: require('./chosenDay').default,
+  days: require('./days').default,
 })

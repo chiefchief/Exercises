@@ -1,7 +1,15 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {View, Text, TouchableOpacity} from 'react-native'
+import {connect} from 'react-redux'
 
-export default function Day({navigation}) {
+function Day({navigation, days, chosenDay}) {
+  const [day, setDay] = useState({})
+
+  useEffect(() => {
+    setDay(days.filter(item => item.id === chosenDay))
+  }, [])
+
+  console.log(day, 'DAY')
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink'}}>
       <Text>{'Day'}</Text>
@@ -14,3 +22,12 @@ export default function Day({navigation}) {
     </View>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    days: state.days,
+    chosenDay: state.chosenDay,
+  }
+}
+
+export default connect(mapStateToProps)(Day)

@@ -1,27 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {View, Dimensions, StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 import Carousel, {Pagination} from 'react-native-snap-carousel'
 import RenderWeek from 'components/render-week'
+import {dayParser} from 'services/dayParser'
 
 const {width} = Dimensions.get('window')
 
-function Schedule({weeks}) {
+function Schedule({days, navigation}) {
   const [active, setActive] = useState(0)
+  const [weeksArray, setWeeksArray] = useState([])
 
-  const renderItem = ({item}) => <RenderWeek />
+  useEffect(() => {
+    setWeeksArray(dayParser(days))
+  }, [])
 
+  const renderItem = ({item}) => <RenderWeek item={item} navigation={navigation} />
   return (
     <View style={styles.mainView}>
       <Carousel
-        data={weeks.weeks}
+        data={weeksArray}
         renderItem={renderItem}
         sliderWidth={width - 32}
         itemWidth={width - 32}
         onSnapToItem={setActive}
       />
       <Pagination
-        dotsLength={weeks.weeks.length}
+        dotsLength={weeksArray.length}
         activeDotIndex={active}
         containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)', position: 'absolute', bottom: 24, paddingVertical: 10}}
         dotStyle={{
@@ -40,7 +45,7 @@ function Schedule({weeks}) {
 
 const mapStateToProps = state => {
   return {
-    weeks: state.weeks,
+    days: state.days,
   }
 }
 
