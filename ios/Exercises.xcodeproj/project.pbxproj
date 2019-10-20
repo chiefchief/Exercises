@@ -11,7 +11,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1C7B31193EE8E7C23EE681FD /* libPods-Exercises.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CBF1F35C15C8B170A1EC84 /* libPods-Exercises.a */; };
+		E35239016E036B4173240835 /* libPods-Exercises.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C97E1AFDFB4B005050CF73 /* libPods-Exercises.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +25,9 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Exercises/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Exercises/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Exercises/main.m; sourceTree = "<group>"; };
-		84CBF1F35C15C8B170A1EC84 /* libPods-Exercises.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Exercises.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F5B11CE375370CE019035DB /* Pods-Exercises.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Exercises.release.xcconfig"; path = "Target Support Files/Pods-Exercises/Pods-Exercises.release.xcconfig"; sourceTree = "<group>"; };
-		E3E9DCBD3ABF5D378C8A6EF2 /* Pods-Exercises.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Exercises.debug.xcconfig"; path = "Target Support Files/Pods-Exercises/Pods-Exercises.debug.xcconfig"; sourceTree = "<group>"; };
+		15D2E85992B4DAFB3FBDF278 /* Pods-Exercises.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Exercises.release.xcconfig"; path = "Target Support Files/Pods-Exercises/Pods-Exercises.release.xcconfig"; sourceTree = "<group>"; };
+		AEA6F65A4B96AEE5B12E3DC5 /* Pods-Exercises.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Exercises.debug.xcconfig"; path = "Target Support Files/Pods-Exercises/Pods-Exercises.debug.xcconfig"; sourceTree = "<group>"; };
+		E4C97E1AFDFB4B005050CF73 /* libPods-Exercises.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Exercises.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C7B31193EE8E7C23EE681FD /* libPods-Exercises.a in Frameworks */,
+				E35239016E036B4173240835 /* libPods-Exercises.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +80,7 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				84CBF1F35C15C8B170A1EC84 /* libPods-Exercises.a */,
+				E4C97E1AFDFB4B005050CF73 /* libPods-Exercises.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,8 +88,8 @@
 		406EA36BA2FD1372A23C7A4E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E3E9DCBD3ABF5D378C8A6EF2 /* Pods-Exercises.debug.xcconfig */,
-				9F5B11CE375370CE019035DB /* Pods-Exercises.release.xcconfig */,
+				AEA6F65A4B96AEE5B12E3DC5 /* Pods-Exercises.debug.xcconfig */,
+				15D2E85992B4DAFB3FBDF278 /* Pods-Exercises.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -131,7 +131,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Exercises" */;
 			buildPhases = (
-				41A6D63ADBA09DBF1E116C98 /* [CP] Check Pods Manifest.lock */,
+				92534FEB03B8EE66D6901C7D /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -202,7 +202,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		41A6D63ADBA09DBF1E116C98 /* [CP] Check Pods Manifest.lock */ = {
+		92534FEB03B8EE66D6901C7D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,7 +272,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3E9DCBD3ABF5D378C8A6EF2 /* Pods-Exercises.debug.xcconfig */;
+			baseConfigurationReference = AEA6F65A4B96AEE5B12E3DC5 /* Pods-Exercises.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -292,7 +292,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F5B11CE375370CE019035DB /* Pods-Exercises.release.xcconfig */;
+			baseConfigurationReference = 15D2E85992B4DAFB3FBDF278 /* Pods-Exercises.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
