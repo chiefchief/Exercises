@@ -1,3 +1,8 @@
+import route from 'services/route'
+import {Alert} from 'react-native'
+
+const ADD_NEW_TASK = '[days] ADD_NEW_TASK'
+
 const initialState = [
   {tasks: [], id: 1},
   {tasks: [], id: 2},
@@ -24,7 +29,31 @@ const initialState = [
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ADD_NEW_TASK:
+      return Object.assign([], [...action.data])
     default:
       return state
   }
 }
+
+export const addTask = ({count, double, img, shortName, when}) => async (dispatch, getState) => {
+  const {days} = getState()
+  let index = null
+  days.forEach((e, i) => {
+    if (e.id == when) index = i
+  })
+  if (index !== null) {
+    if (count) {
+      let newItem = {...days[index]}
+      newItem.tasks.push({count, double, img, shortName})
+      dispatch(addNewTask([...days.slice(0, index), {...newItem}, ...days.slice(index + 1)]))
+      route.pop()
+    } else {
+      Alert.alert('Неверное количество', '', [{text: 'OK', onPress: () => {}}])
+    }
+  } else {
+    Alert.alert('Неверно указан день', '', [{text: 'OK', onPress: () => {}}])
+  }
+}
+
+const addNewTask = data => ({type: ADD_NEW_TASK, data})

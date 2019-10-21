@@ -3,17 +3,17 @@ import {View, Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native
 import {dayOfWeek} from 'services/dayOfWeek'
 import {setChosenDay} from 'reducers/chosenDay'
 import {connect} from 'react-redux'
+import route from 'services/route'
 
 const {width} = Dimensions.get('window')
 
-function RenderWeek({navigation, item, dispatch}) {
+function RenderWeek({item, dispatch}) {
   const getTaskCount = array => (array.length ? `${array.length} Упражнений` : 'Отсутствуют')
 
   const goToDay = id => {
     dispatch(setChosenDay(id))
-    navigation.navigate('Day')
+    route.push('Day')
   }
-
   const renderItem = (item, index) => (
     <TouchableOpacity key={index} style={[styles.button, index > 4 && styles.weekEnd]} onPress={() => goToDay(item.id)}>
       <Text style={styles.dayOfWeek}>{dayOfWeek(index)}</Text>

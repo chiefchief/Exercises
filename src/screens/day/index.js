@@ -1,44 +1,27 @@
 import React, {useEffect, useState} from 'react'
-import {View, Text, TouchableOpacity, FlatList} from 'react-native'
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
+import route from 'services/route'
+import styles from './styles'
+import TaskComponent from '../../components/task-component'
 
-function Day({navigation, days, chosenDay}) {
-  const [day, setDay] = useState({})
-
+function Day({days, chosenDay}) {
+  const [day, setDay] = useState({id: 0, tasks: []})
   useEffect(() => {
-    setDay(days.filter(item => item.id === chosenDay))
-  }, [])
+    setDay(days.filter(item => item.id === chosenDay)[0])
+  }, [days])
 
-  const renderItem = ({item}) => <View></View>
-  const keyExtractor = (item, index) => `${index}`
+  const renderItem = (item, index) => <TaskComponent item={item} key={`${index}`} />
 
-  console.log(day, 'DAY')
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'lightblue',
-        paddingHorizontal: 16,
-        paddingVertical: 24,
-      }}>
-      <Text style={{textAlign: 'center', marginBottom: 8}}>{'Упражнения'}</Text>
-      <FlatList
-        style={{flex: 1, backgroundColor: 'white', borderRadius: 16}}
-        data={day.tasks}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-      />
-      <TouchableOpacity
-        style={{
-          width: '100%',
-          height: 40,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          borderRadius: 20,
-          marginTop: 16,
-        }}
-        onPress={() => navigation.navigate('AddExercise')}>
+    <View style={styles.container}>
+      <Text style={styles.text}>{'Упражнения'}</Text>
+      <ScrollView
+        style={styles.flat}
+        contentContainerStyle={{justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'wrap'}}>
+        {day.tasks.map(renderItem)}
+      </ScrollView>
+      <TouchableOpacity style={styles.button} onPress={() => route.push('AddExercise')}>
         <Text>{'Добавить'}</Text>
       </TouchableOpacity>
     </View>

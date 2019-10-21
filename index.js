@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 import store from './src/store'
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
-
+import route from 'services/route'
 console.disableYellowBox = true
 
 const Navigator = createStackNavigator(
@@ -24,8 +24,8 @@ const Exercises = createAppContainer(Navigator)
 const App = () => (
   <Provider store={store}>
     {/* <StatusBar barStyle="dark-content" translucent={true} backgroundColor={'transparent'} /> */}
-    {/* <Exercises ref={navigatorRef => NavigationService.setRoot(navigatorRef)} /> */}
-    <Exercises />
+    <Exercises ref={navigatorRef => route.setRoot(navigatorRef)} />
+    {/* <Exercises /> */}
   </Provider>
 )
 AppRegistry.registerComponent(appName, () => App)

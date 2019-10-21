@@ -3,8 +3,10 @@ import {View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, Image} fr
 import ModalDropdown from 'react-native-modal-dropdown'
 import {connect} from 'react-redux'
 import {options} from 'constants/options'
+import {addTask} from 'reducers/days'
+import styles from './styles'
 
-function AddExercise({navigation, chosenDay}) {
+function AddExercise({chosenDay, days, dispatch}) {
   const [when, setWhen] = useState(0)
   const [count, setCount] = useState(0)
   const [double, setDouble] = useState(false)
@@ -13,36 +15,21 @@ function AddExercise({navigation, chosenDay}) {
   useEffect(() => {
     setWhen(chosenDay)
   }, [])
-
+  
   const ViewText = ({title, toggle}) => (
-    <TouchableOpacity
-      onPress={() => setDouble(!double)}
-      disabled={!toggle}
-      style={{flexDirection: 'row', marginBottom: 4, marginTop: 16}}>
-      {toggle && (
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginRight: 8,
-            width: 16,
-            height: 16,
-            borderWidth: 1,
-            borderRadius: 4,
-            borderColor: 'black',
-          }}>
-          {double && <View style={{width: 8, height: 8, backgroundColor: 'black', borderRadius: 2}}></View>}
-        </View>
-      )}
+    <TouchableOpacity onPress={() => setDouble(!double)} disabled={!toggle} style={styles.toggleView}>
+      {toggle && <View style={styles.checkBox}>{double && <View style={styles.checkMark}></View>}</View>}
       <Text>{`${title}`}</Text>
     </TouchableOpacity>
   )
 
   const renderRow = item => {
     return (
-      <View>
-        <Image source={item.img} style={{width: 20, height: 20}} />
-        <Text>{'item'}</Text>
+      <View style={styles.dropdownItem}>
+        <View style={styles.imgView}>
+          <Image source={item.img} style={styles.img} />
+        </View>
+        <Text>{item.name}</Text>
       </View>
     )
   }
@@ -50,44 +37,27 @@ function AddExercise({navigation, chosenDay}) {
 
   const onSelect = (index, value) => setExercise(value)
 
+  const saveTask = () => {
+    dispatch(addTask({when, count, double, ...exercise}))
+  }
+
   return (
-    <KeyboardAvoidingView
-      style={{
-        flex: 1,
-        backgroundColor: 'lightblue',
-        justifyContent: 'center',
-        paddingHorizontal: 16,
-        paddingVertical: 24,
-      }}
-      behavior="padding"
-      enabled>
+    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
       <ViewText title={'День'} />
       <TextInput value={`${when}`} onChangeText={setWhen} keyboardType={'number-pad'} />
       <ViewText title={'Упражнение'} />
       <ModalDropdown
-        style={{width: '100%'}}
         renderButtonText={renderButtonText}
         defaultValue={exercise.name}
         onSelect={onSelect}
         options={options}
+        dropdownStyle={styles.dropdownStyle}
         renderRow={renderRow}
       />
       <ViewText title={'Колличество повторений'} />
       <TextInput value={`${count}`} onChangeText={setCount} keyboardType={'number-pad'} />
       <ViewText title={'Двойная нагрузка'} toggle />
-      <TouchableOpacity
-        style={{
-          width: '100%',
-          height: 40,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          borderRadius: 20,
-          marginTop: 16,
-          marginBottom: 24,
-          alignSelf: 'flex-end',
-        }}
-        onPress={() => console.log('save')}>
+      <TouchableOpacity style={styles.button} onPress={saveTask}>
         <Text>{'Сохранить'}</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
@@ -97,6 +67,7 @@ function AddExercise({navigation, chosenDay}) {
 const mapStateToProps = state => {
   return {
     chosenDay: state.chosenDay,
+    days: state.days,
   }
 }
 

@@ -7,15 +7,15 @@ import {dayParser} from 'services/dayParser'
 
 const {width} = Dimensions.get('window')
 
-function Schedule({days, navigation}) {
+function Schedule({days}) {
   const [active, setActive] = useState(0)
   const [weeksArray, setWeeksArray] = useState([])
 
   useEffect(() => {
     setWeeksArray(dayParser(days))
-  }, [])
+  }, [days])
 
-  const renderItem = ({item}) => <RenderWeek item={item} navigation={navigation} />
+  const renderItem = ({item}) => <RenderWeek item={item} />
   return (
     <View style={styles.mainView}>
       <Carousel
@@ -28,14 +28,8 @@ function Schedule({days, navigation}) {
       <Pagination
         dotsLength={weeksArray.length}
         activeDotIndex={active}
-        containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)', position: 'absolute', bottom: 24, paddingVertical: 10}}
-        dotStyle={{
-          width: 10,
-          height: 10,
-          borderRadius: 5,
-          marginHorizontal: 8,
-          backgroundColor: 'rgba(255, 255, 255, 0.92)',
-        }}
+        containerStyle={styles.containerStyle}
+        dotStyle={styles.dotStyle}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
       />
@@ -59,5 +53,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     paddingVertical: 24,
     paddingHorizontal: 16,
+  },
+  containerStyle: {
+    // backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    position: 'absolute',
+    bottom: 24,
+    paddingVertical: 10,
+  },
+  dotStyle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
   },
 })
