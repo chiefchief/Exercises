@@ -11,18 +11,11 @@ console.disableYellowBox = true
 const Navigator = createStackNavigator(
   {
     Schedule: {screen: require('screens/schedule').default, navigationOptions: {title: 'График'}},
-    Day: {screen: require('screens/day').default, navigationOptions: {title: 'День'}},
+    Day: {screen: require('screens/day').default, navigationOptions: {title: 'Просмотр дня'}},
     AddExercise: {screen: require('screens/add-exercise').default, navigationOptions: {title: 'Добавление упражнения'}},
   },
   {
     initialRouteName: 'Schedule',
-    //   defaultNavigationOptions: {
-    //     headerTransparent: true,
-    //     header: null,
-    //   },
-    //   navigationOptions: {
-    //     gesturesEnabled: false,
-    //   },
   },
 )
 
